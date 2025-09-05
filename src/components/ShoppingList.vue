@@ -3,10 +3,8 @@
     <!-- Header -->
     <header class="header">
       <div class="header-content">
-        <h1 class="title">
-          <span class="icon">🛒</span>
-          Shopping List
-        </h1>
+        <img src="../assets/syaping-logo-2.png" alt="logo" class="logo">
+        <span class="title">ꜱʏᴀᴘɪɴɢ</span>
         <div class="stats">
           <span class="stat">{{ items.length }} items</span>
           <span class="stat purchased">{{ purchasedCount }} done</span>
@@ -30,7 +28,7 @@
         <button
           v-for="filter in filters"
           :key="filter.value"
-          @click="activeFilter = filter.value"
+          @click="activeFilter = filter.value as 'all' | 'pending' | 'purchased';"
           :class="['filter-tab', { active: activeFilter === filter.value }]"
         >
           {{ filter.label }}
@@ -39,7 +37,7 @@
     </div>
 
     <!-- Add Item Form -->
-    <div class="add-item-section">
+    <div class="add-item-section" v-if="false">
       <form @submit.prevent="addItem" class="add-form">
         <input
           v-model="newItem.name"
@@ -300,6 +298,7 @@ watch(items, saveToStorage, { deep: true })
 .shopping-container {
   width: 100%;
   max-width: 425px;
+  min-width: 425px;
   min-height: 100vh;
   background: white;
   display: flex;
@@ -316,6 +315,18 @@ watch(items, saveToStorage, { deep: true })
   top: 0;
   z-index: 10;
 }
+
+  .logo {
+    height: 40px;
+    width: auto;
+    margin-right: 15px;
+  }
+
+  .brand-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
 
 .header-content {
   display: flex;
